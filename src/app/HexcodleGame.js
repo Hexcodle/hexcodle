@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, use, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useSound from "use-sound";
 import { useLocalStorage } from "@mantine/hooks";
 import { ArrowRight, Share2 } from "lucide-react";
