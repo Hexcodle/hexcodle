@@ -8,14 +8,28 @@ function getFilePath(isMini) {
     return isMini ? MINI_COLORS_FILE : COLORS_FILE;
 }
 
+let cachedColors = null;
+let cachedMiniColors = null;
+
 function readLocalColors(isMini) {
+    if (isMini && cachedMiniColors) return cachedMiniColors;
+    if (!isMini && cachedColors) return cachedColors;
+
     const filePath = getFilePath(isMini);
     try {
         if (!fs.existsSync(filePath)) {
             return {};
         }
         const data = fs.readFileSync(filePath, "utf8");
-        return JSON.parse(data);
+        const parsedData = JSON.parse(data);
+
+        if (isMini) {
+            cachedMiniColors = parsedData;
+        } else {
+            cachedColors = parsedData;
+        }
+
+        return parsedData;
     } catch (e) {
         console.error(`Error reading ${isMini ? "mini " : ""}colors file:`, e);
         return {};
