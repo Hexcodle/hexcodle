@@ -82,6 +82,7 @@ export default function RulesModal() {
             New to hex codes? Learn more{" "}
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://www.freecodecamp.org/news/how-hex-code-colors-work-how-to-choose-colors-without-a-color-picker/"
               className="text-blue-500 hover:underline"
             >
