@@ -36,6 +36,7 @@ export default function Footer() {
               <Link
                 href="https://hannah-larsen.github.io"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:text-blue-100 font-bold underline transition-colors"
               >
                 Hannah
@@ -44,6 +45,7 @@ export default function Footer() {
               <Link
                 href="https://ekimerton.github.io"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:text-blue-100 font-bold underline transition-colors"
               >
                 Ekim
@@ -55,6 +57,7 @@ export default function Footer() {
               <Link
                 href="https://forms.gle/EEX8iJKkr5ATjk6L8"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-blue-100/80 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors flex items-center gap-1.5"
               >
                 Submit Feedback
@@ -62,6 +65,7 @@ export default function Footer() {
               <Link
                 href="https://www.buymeacoffee.com/hexcodle"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-blue-100/80 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors flex items-center gap-1.5"
               >
                 Donate
