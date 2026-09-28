@@ -85,11 +85,11 @@ export default function InboxedModal({
             </strong>, and we think you&apos;re going to love it!
           </p>
           <p>
-            Inboxed is <strong>a game fully playable inside your email</strong>, and if you're a serial morning email-checker like us, we think you'll love it.
+            Inboxed is <strong>a game fully playable inside your email</strong>, and if you&apos;re a serial morning email-checker like us, we think you&apos;ll love it.
           </p>
 
           <p>
-            If you're a fan of Hexcodle and daily word games, you should give Inboxed a try and let us know what you think! Head over to{" "}
+            If you&apos;re a fan of Hexcodle and daily word games, you should give Inboxed a try and let us know what you think! Head over to{" "}
             <a
               href="https://inboxed.fun"
               target="_blank"
