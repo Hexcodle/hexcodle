@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, X, BookHeart, Coffee, MessageCircleDashed, ChevronRight, ArrowRight } from "lucide-react";
+import { Menu, X, BookHeart, Coffee, MessageCircleDashed, ChevronRight } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import NavbarCenter from "./NavbarCenter";
 import NavbarRight from "./NavbarRight";
@@ -97,18 +97,6 @@ export default function NavbarClient({ hexcodleNumber, miniNumber }) {
                     }`}
             >
                 <div className="min-h-0 border-t border-gray-200">
-                    <Link href="/blog/new-design" onClick={() => setIsOpen(false)} tabIndex={isOpen ? 0 : -1}>
-                        <div
-                            className="bg-blue-50 py-2 border-b border-blue-100 hover:bg-blue-100 transition-colors duration-300 group/announcement"
-                        >
-                            <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-2">
-                                <span className="text-blue-900 text-xs font-serif font-bold tracking-tight flex items-center gap-2">
-                                    Update: Feb 13 2026 - New UI Improvements!
-                                    <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover/announcement:translate-x-1" />
-                                </span>
-                            </div>
-                        </div>
-                    </Link>
                     <div className="max-w-7xl mx-auto px-4 py-4 md:py-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
                             {menuItems.map((item, idx) => (

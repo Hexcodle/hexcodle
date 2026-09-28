@@ -1,74 +1,33 @@
-import styled from "styled-components";
-import { Button } from "@/app/components/ui/button";
-import Link from "next/link";
-import Image from "next/image";
+"use client";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-  DialogClose,
-} from "@/app/components/ui/dialog";
+import React, { useState } from "react";
+import InboxedModal, { InboxedPill } from "./InboxedModal";
 
-const Wrapper = styled.button`
-  --color-1: #f8b6a5ff;
-  --color-2: #9b1616ff;
-  background-color: var(--color-1);
-  border: var(--color-2) 1px solid;
-  color: var(--color-2);
-  border-radius: 24px;
-  padding: 4px 12px;
-  max-width: min(600px, 100%);
-  margin-top: -4px;
-  margin-bottom: -4px;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  transition: ease, 0.3s;
+export default function Announcement({ children, onClick }) {
+  const [open, setOpen] = useState(false);
 
-  &:hover {
-    transform: scale(1.03);
-    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
-    transition: fade, 0.5s;
-  }
-`;
+  const handleClick = (e) => {
+    onClick?.(e);
+    setOpen(true);
+  };
 
-export default function Announcement({ children }) {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
-      <DialogContent className="max-sm:max-w-[425px] max-w-xl overflow-auto max-h-[90%] bg-cream-50 border-gray-200">
-        <DialogHeader className="space-y-0">
-          <DialogTitle className="font-serif text-2xl font-bold">Sorry for the Error!</DialogTitle>
-          <DialogDescription></DialogDescription>
-        </DialogHeader>
-
-        <div className="font-sans space-y-4 text-gray-700">
-          <p>
-            Hey Hexcodlers,
-          </p>
-          <p>
-            We are aware of the issue where the color name is displaying <i>Error</i>. We are actively working on resolving this issue. Thank you for your patience!
-          </p>
-          <p>-E&amp;H 💗</p>
+  if (children) {
+    return (
+      <>
+        <div onClick={handleClick} className="inline-block cursor-pointer">
+          {children}
         </div>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button type="button" className="bg-blue-900 hover:bg-blue-800 text-white font-serif font-bold">Close</Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
+        <InboxedModal open={open} onOpenChange={setOpen} />
+      </>
+    );
+  }
 
-
-
-    </Dialog>
+  return (
+    <>
+      <InboxedPill onClick={() => setOpen(true)} />
+      <InboxedModal open={open} onOpenChange={setOpen} />
+    </>
   );
 }
+
+export { InboxedPill };

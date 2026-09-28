@@ -6,7 +6,7 @@ import { useLocalStorage } from "@mantine/hooks";
 import { ArrowRight, Share2 } from "lucide-react";
 import useSavestate from "@/app/hooks/useSavestate.js";
 import Guess from "@/app/components/Guess.js";
-import Announcement from "@/app/components/Annoucement.js";
+import InboxedModal, { InboxedPill } from "@/app/components/InboxedModal.js";
 import HexInput from "@/app/components/HexInput.js";
 import Keyboard from "@/app/components/Keyboard.js";
 import NextUnsolvedButton from "@/app/components/NextUnsolvedButton.js";
@@ -49,7 +49,7 @@ export default function MiniHexcodle({
     "Start by typing your guess above!"
   );
   const [endModalVisible, setEndModalVisible] = useState(false);
-  const [isLaunchModalVisible, setIsLaunchModalVisible] = useState(false);
+  const [isInboxedModalVisible, setIsInboxedModalVisible] = useState(false);
   const inputRef = useRef(null);
 
   const hasWon = useMemo(() => {
@@ -186,8 +186,15 @@ export default function MiniHexcodle({
 
   return (
     <>
-      <main className="flex flex-col items-center gap-1 md:gap-4 py-0 px-2 bg-cream-50 overflow-hidden">
-        <section className="relative px-2 sm:px-8 pt-0 pb-2 md:py-4 text-center items-center flex flex-col w-full max-w-[600px]">
+      <main className="flex flex-col items-center py-0 px-2 bg-cream-50 overflow-hidden">
+        <div className="pt-2 pb-3 md:pt-3 md:pb-4">
+          <InboxedPill onClick={() => setIsInboxedModalVisible(true)} />
+        </div>
+        <InboxedModal
+          open={isInboxedModalVisible}
+          onOpenChange={setIsInboxedModalVisible}
+        />
+        <section className="relative px-2 sm:px-8 pt-0 pb-2 md:pb-4 text-center items-center flex flex-col w-full max-w-[600px]">
           <div className="flex flex-row w-full gap-3 sm:gap-6 mb-3 md:mb-6 h-16 md:h-24">
             <div
               className="flex-1 flex items-center justify-center p-4 rounded-xl border border-gray-200 shadow-sm transition-colors duration-500"
