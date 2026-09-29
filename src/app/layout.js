@@ -4,6 +4,7 @@ import StyledComponentsRegistry from "./lib/registry";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import MainWrapper from "./components/MainWrapper";
 
 const GTM_ID = "G-1J0E738QRV";
 const inter = Inter({
@@ -79,9 +80,9 @@ export default async function RootLayout(props) {
         <StyledComponentsRegistry>
           <GoogleAnalytics gaId={GTM_ID} />
           <Navbar pathname={pathname} />
-          <main className="pt-16 min-h-screen">
+          <MainWrapper>
             {children}
-          </main>
+          </MainWrapper>
           <Footer />
         </StyledComponentsRegistry>
       </body>
