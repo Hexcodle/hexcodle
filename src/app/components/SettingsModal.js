@@ -63,13 +63,13 @@ export default function SettingsModal({ mode = "mini" }) {
                 <p>🔼 / 🔽 Guess higher or lower</p>
               </>
             )}
-            {settings.difficulty === "easy" && settings.colorMode === "rgb" && (
+            {settings.difficulty === "easy" && mode === "hexcodle" && settings.colorMode === "rgb" && (
               <>
                 <p>🔼 / 🔽 Guess higher or lower by 10 or less</p>
                 <p>⏫️ / ⏬️ Guess higher or lower by 11+</p>
               </>
             )}
-            {settings.difficulty === "easy" && settings.colorMode === "hex" && (
+            {settings.difficulty === "easy" && (mode !== "hexcodle" || settings.colorMode !== "rgb") && (
               <>
                 <p>🔼 / 🔽 Guess higher or lower by 1 or 2</p>
                 <p>⏫️ / ⏬️ Guess higher or lower by 3+</p>
@@ -79,7 +79,7 @@ export default function SettingsModal({ mode = "mini" }) {
           <div>
             <h4 className="font-sans pb-1 font-bold text-lg">Difficulty</h4>
             <RadioGroup
-              defaultValue={settings.difficulty}
+              value={settings.difficulty || "easy"}
               onValueChange={(val) => {
                 handleDifficultyChange(val);
               }}
@@ -102,7 +102,7 @@ export default function SettingsModal({ mode = "mini" }) {
             <div>
               <h4 className="font-sans pb-1 font-bold text-lg">Color Mode</h4>
               <RadioGroup
-                defaultValue={settings.colorMode}
+                value={settings.colorMode || "hex"}
                 onValueChange={(val) => {
                   handleColorModeChange(val);
                 }}

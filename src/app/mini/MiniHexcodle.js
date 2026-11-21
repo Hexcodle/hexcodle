@@ -29,6 +29,7 @@ export default function MiniHexcodle({
     key: "settings",
     defaultValue: {
       difficulty: "easy",
+      colorMode: "hex",
     },
   });
 

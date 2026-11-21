@@ -87,7 +87,7 @@ export function EndModal({
     },
   });
   const processGuesses =
-    settings.colorMode === "hex" || isMini
+    settings.colorMode !== "rgb" || isMini
       ? processHexGuesses
       : processRGBGuesses;
   const emojis = processGuesses(guesses, color, settings);

@@ -23,13 +23,20 @@ export default function HexcodleGame({
   isMini = false,
 }) {
   const [guesses, setGuesses, isComplete, setIsComplete] = useSavestate(number);
-  const [settings, _setSettings] = useLocalStorage({
+  const [settings, setSettings] = useLocalStorage({
     key: "settings",
     defaultValue: {
       difficulty: "easy",
       colorMode: "hex",
     },
   });
+  const colorMode = settings?.colorMode || "hex";
+
+  useEffect(() => {
+    if (settings && !settings.colorMode) {
+      setSettings({ ...settings, colorMode: "hex" });
+    }
+  }, [settings, setSettings]);
   const [streak, setStreak] = useLocalStorage({
     key: "streak",
     defaultValue: {
@@ -51,9 +58,9 @@ export default function HexcodleGame({
   const inputRef = useRef(null);
 
   useEffect(() => {
-    setUserInput(settings.colorMode === "rgb" ? ["", "", ""] : ["", "", "", "", "", ""]);
+    setUserInput(colorMode === "rgb" ? ["", "", ""] : ["", "", "", "", "", ""]);
     setSelectedIndex(0);
-  }, [settings.colorMode]);
+  }, [colorMode]);
 
   const hasWon = guesses.includes(targetColor);
 
@@ -218,13 +225,13 @@ export default function HexcodleGame({
         inputRef.current.focus();
       }
 
-      if (settings.colorMode === "rgb") {
+      if (colorMode === "rgb") {
         handleRgbKey(key);
       } else {
         handleHexKey(key);
       }
     },
-    [loading, isComplete, handleRgbKey, handleHexKey, settings.colorMode]
+    [loading, isComplete, handleRgbKey, handleHexKey, colorMode]
   );
 
   useEffect(() => {
@@ -238,7 +245,7 @@ export default function HexcodleGame({
         handleKey("ENTER");
       } else if (e.key === "Backspace") {
         handleKey("BACKSPACE");
-      } else if (settings.colorMode === "rgb") {
+      } else if (colorMode === "rgb") {
         if (/^[0-9]$/.test(e.key)) {
           handleKey(e.key);
         } else if (e.key === " " || e.key === "ArrowRight") {
@@ -255,7 +262,7 @@ export default function HexcodleGame({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKey, settings.colorMode]);
+  }, [handleKey, colorMode]);
 
 
   return (
@@ -313,7 +320,7 @@ export default function HexcodleGame({
                     userInput={userInput}
                     isCurrentRow={true}
                     selectedIndex={selectedIndex}
-                    numDigits={settings.colorMode === "rgb" ? 3 : 6}
+                    numDigits={colorMode === "rgb" ? 3 : 6}
                     onSelect={setSelectedIndex}
                   />
                 );
@@ -324,7 +331,7 @@ export default function HexcodleGame({
                   <Guess
                     key={index}
                     guess={guesses[index]}
-                    type={settings.colorMode}
+                    type={colorMode}
                     target={targetColor}
                     hardMode={settings.difficulty}
                     isVictory={isVictoryAnimationActive}
@@ -333,7 +340,7 @@ export default function HexcodleGame({
                 );
               } else {
                 return (
-                  <HexInput key={index} userInput="#" isCurrentRow={false} numDigits={settings.colorMode === "rgb" ? 3 : 6} />
+                  <HexInput key={index} userInput="#" isCurrentRow={false} numDigits={colorMode === "rgb" ? 3 : 6} />
                 );
               }
             })}
@@ -367,7 +374,7 @@ export default function HexcodleGame({
           </div>
 
           {!isComplete && (
-            <Keyboard onKey={handleKey} colorMode={settings.colorMode} />
+            <Keyboard onKey={handleKey} colorMode={colorMode} />
           )}
 
           {isComplete && (
